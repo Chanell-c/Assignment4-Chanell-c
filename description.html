@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample Website</title>
+    <!- This html file contains info regarding a website->
+
+    <script type="text/javascript" src="data.json"></script>
+
+    <style>
+        body{
+        background-color: Lavender;}
+
+        #container{
+        background-color: LightSteelBlue ;
+        padding: 20px;
+        font-family: "Book Antiqua";
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        width; 100%;
+        height: 800px;}
+
+        #main{
+        background-color:white;
+        border: 1px solid black;
+        padding: 20px;
+        font-family: "Palatino Linotype";
+        text-align: center;
+        float: right;
+        width: 45%;}
+
+        #chart{
+        background-color: white;
+        padding: 20px;
+        text-align: center;
+        float: left;
+        width: 45%;
+        height: 400px;}
+
+        #footer{
+        float: clear;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div id="container">
+
+        <h1>Home</h1>
+
+        <div id="main">
+            <h2>About</h2>
+            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum.</p>
+
+            <p>Ultricies leo integer malesuada nunc vel risus commodo viverra. Aliquam sem fringilla ut morbi tincidunt
+                augue interdum velit euismod. Varius quam quisque id diam vel quam. Sit amet porttitor eget dolor morbi.
+                Vitae congue eu consequat ac felis donec et. Dolor sit amet consectetur adipiscing elit pellentesque. At
+                ultrices mi tempus imperdiet nulla malesuada pellentesque elit. Et tortor consequat id porta nibh venenatis
+                cras sed. Id eu nisl nunc mi ipsum faucibus vitae aliquet. Quis lectus nulla at volutpat diam ut. Purus
+                viverra accumsan in nisl nisi scelerisque eu. Lorem donec massa sapien faucibus et. Placerat vestibulum
+                lectus mauris ultrices eros in cursus turpis massa. Duis at tellus at urna. At lectus urna duis convallis.
+                In nisl nisi scelerisque eu ultrices vitae. Eu augue ut lectus arcu. Nisl nunc mi ipsum faucibus vitae
+                aliquet nec ullamcorper sit. </p>
+
+            <a href="https://www.google.com/"> Here's a link to google </a> <br>
+        </div>
+
+        <div id="chart" >
+            <h2>data</h2>
+                <select id="myselect" onchange="change_myselect(this.value)">
+                  <option value="">Choose an option:</option>
+                  <option value="customers">Employees</option>
+                </select>
+
+                <p id="info"></p>
+
+                <script>
+                    function change_myselect(sel) {
+                      var obj, dbParam, xmlhttp, jsonData, x, txt = "";
+                      obj = { table: sel, limit: 10 };
+                      dbParam = JSON.stringify(obj);
+                      xmlhttp = new XMLHttpRequest();
+                      xmlhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                         jsonData = JSON.parse(this.data);
+                          txt += "<table border='1'>"
+                          for (x in jsonData) {
+                            txt += "<tr><td>" + jsonData[x].fullName + "</td><td>" + jsonData[x].gender + "</td>
+                                <td>" + jsonData[x].dept + "</td><td>" + jsonData[x].uni + "</td>
+                                <td>" + jsonData[x].country + "</td><td>" + jsonData[x].skill + "</td></tr>";
+                          }
+                          txt += "</table>"
+                          document.getElementById("info").innerHTML = txt;
+                        }
+                      };
+                      xmlhttp.send("x=" + dbParam);
+                    }
+                </script>
+        </div>
+
+        <div id="footer">
+        </div>
+
+    </div>
+
+</body>
+</html>
